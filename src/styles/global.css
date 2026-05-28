@@ -1,0 +1,104 @@
+@keyframes pop {
+  from {
+    transform: translateX(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cc {
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s;
+  cursor: grab;
+  user-select: none;
+}
+.cc:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+}
+.cc:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+.tab {
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+input,
+select {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 7px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  background: #fff;
+  color: #1a1a2e;
+}
+input:focus,
+select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.bico {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 5px;
+  transition: background 0.12s;
+  line-height: 1;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.bico:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+.color-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    transform 0.1s,
+    border-color 0.1s;
+  flex-shrink: 0;
+}
+.color-dot:hover {
+  transform: scale(1.15);
+}
+.color-dot.sel {
+  border-color: #1a1a2e;
+  transform: scale(1.1);
+}

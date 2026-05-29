@@ -79,6 +79,35 @@ export function useMallaCurricular() {
       setDragOver(null);
       return;
     }
+  
+    const course = getCourse(courseId);
+    const toIndex = semesters.findIndex((s) => s.id === toSemId);
+  
+    // Validar que los prerequisitos estén en semestres anteriores
+    for (const prereqId of course?.prereqs ?? []) {
+      const prereqSemIndex = semesters.findIndex((s) =>
+        s.courses.includes(prereqId)
+      );
+      if (prereqSemIndex === -1 || prereqSemIndex >= toIndex) {
+        const prereqName = getCourse(prereqId)?.name ?? prereqId;
+        notify(`"${course.name}" requiere "${prereqName}" en un semestre anterior`, "warning");
+        setDragging(null);
+        setDragOver(null);
+        return;
+      }
+    }
+  
+    // Validar que los ramos que dependen de este no queden en semestres anteriores o iguales
+    for (const dep of courses.filter((c) => c.prereqs.includes(courseId))) {
+      const depSemIndex = semesters.findIndex((s) => s.courses.includes(dep.id));
+      if (depSemIndex !== -1 && depSemIndex <= toIndex) {
+        notify(`"${dep.name}" depende de "${course.name}", muévelo a un semestre posterior primero`, "warning");
+        setDragging(null);
+        setDragOver(null);
+        return;
+      }
+    }
+  
     setSemesters((prev) => {
       const next = prev.map((s) => ({ ...s, courses: [...s.courses] }));
       const from = next.find((s) => s.id === fromSemId);

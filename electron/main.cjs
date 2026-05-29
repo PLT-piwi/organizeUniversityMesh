@@ -9,6 +9,7 @@ function createWindow() {
     minHeight: 600,
     autoHideMenuBar: true,
     title: "Organizador de Mallas",
+    icon: path.join(__dirname, "../build/icon.ico"),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

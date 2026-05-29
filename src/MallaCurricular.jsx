@@ -60,7 +60,7 @@ export default function MallaCurricular() {
           }}
         >
           © {new Date().getFullYear()} Malla Curricular · Todos los derechos
-          reservados Daniel Solano Godoy
+          reservados Daniel Solano Godoy 🐥
         </footer>
       </div>
     </MallaContext.Provider>

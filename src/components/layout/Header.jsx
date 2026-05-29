@@ -57,7 +57,7 @@ export function Header() {
             flexShrink: 0,
           }}
         >
-          <img src="../../build/icon.ico" alt="icono" style={{ width: 30, height: 30 }} />
+          <span style={{ color: "#fff", fontSize: 14 }}>⬡</span>
         </div>
         {editingName ? (
           <input

@@ -22,6 +22,8 @@ export default function MallaCurricular() {
           minHeight: "100vh",
           background: "#F7F8FA",
           fontFamily: "'DM Sans','Segoe UI',sans-serif",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <link
@@ -34,12 +36,11 @@ export default function MallaCurricular() {
         <ConfirmDeleteCourseModal />
         <ConfirmDeleteCategoryModal />
         <ConfirmClearAllCoursesModal />
-        
 
         <Header />
         <ProgressStrip />
 
-        <div style={{ flexGrow: 1 }}>
+        <div style={{ flex: 1 }}>
           <div style={{ maxWidth: 1500, margin: "0 auto", padding: "18px" }}>
             {m.activeTab === "malla" && <MallaTab />}
             {m.activeTab === "progreso" && <ProgresoTab />}
@@ -54,9 +55,8 @@ export default function MallaCurricular() {
             fontSize: 11,
             color: "#94A3B8",
             background: "#fff",
-            marginTop: 24,
-            display: "flex",
-            flexDirection: "column",
+            marginTop: "auto",
+            flexShrink: 0,
           }}
         >
           © {new Date().getFullYear()} Malla Curricular · Todos los derechos

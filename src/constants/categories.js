@@ -1,10 +1,24 @@
 export const DEFAULT_CATEGORIES = [
-  { id: "diseno", label: "Diseño", colorId: "orange" },
-  { id: "ciencias", label: "Ciencias", colorId: "blue" },
-  { id: "ingenieria", label: "Ingeniería", colorId: "green" },
-  { id: "humanidades", label: "Humanidades", colorId: "purple" },
-  { id: "gestion", label: "Gestión", colorId: "amber" },
-  { id: "especialidad", label: "Especialidad", colorId: "rose" },
+  {
+    "id": "diseno",
+    "label": "Major",
+    "colorId": "pink"
+  },
+  {
+    "id": "ciencias",
+    "label": "Plan común",
+    "colorId": "purple"
+  },
+  {
+    "id": "gestion",
+    "label": "Minor",
+    "colorId": "amber"
+  },
+  {
+    "id": "cat_1780018257707",
+    "label": "Formación general",
+    "colorId": "blue"
+  }
 ];
 
 export function isDefaultCategory(catId) {

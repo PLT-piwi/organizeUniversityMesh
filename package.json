@@ -1,7 +1,7 @@
 {
   "name": "organizador-mallas",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gestor de mallas curriculares",
   "author": "Tu nombre",
   "main": "electron/main.cjs",

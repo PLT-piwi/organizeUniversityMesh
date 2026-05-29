@@ -29,7 +29,7 @@
   "build": {
     "appId": "com.organizadormallas.app",
     "productName": "Organizador de Mallas",
-    "icon": "build/icon.ico",
+    "icon": "build/icon.png",
     "directories": {
       "output": "release"
     },

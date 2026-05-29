@@ -1,9 +1,11 @@
+import { useRef, useEffect } from "react";
 import { useMalla } from "../../context/MallaContext.jsx";
 import { SemesterColumn } from "../SemesterColumn.jsx";
 import { CourseCard } from "../CourseCard.jsx";
 import { UNASSIGNED_ID } from "../../constants/config.js";
 
 export function MallaTab() {
+  const mallaScrollRef = useRef(null);
   const m = useMalla();
   const {
     courses,
@@ -71,6 +73,38 @@ export function MallaTab() {
     resetAll,
     filteredCourses,
   } = m;
+
+  useEffect(() => {
+    const handleDragOver = (e) => {
+      if (!dragging || !mallaScrollRef.current) return;
+
+      const container = mallaScrollRef.current;
+      const rect = container.getBoundingClientRect();
+
+      const edgeSize = 150; // distancia al borde
+      const speed = 18; // velocidad scroll
+
+      // scroll horizontal
+      if (e.clientX > rect.right - edgeSize) {
+        container.scrollLeft += speed;
+      } else if (e.clientX < rect.left + edgeSize) {
+        container.scrollLeft -= speed;
+      }
+
+      // scroll vertical página
+      if (e.clientY > window.innerHeight - edgeSize) {
+        window.scrollBy(0, speed);
+      } else if (e.clientY < edgeSize) {
+        window.scrollBy(0, -speed);
+      }
+    };
+
+    window.addEventListener("dragover", handleDragOver);
+
+    return () => {
+      window.removeEventListener("dragover", handleDragOver);
+    };
+  }, [dragging]);
 
   return (
     <div>
@@ -151,6 +185,7 @@ export function MallaTab() {
         </span>
       </div>
       <div
+        ref={mallaScrollRef}
         style={{
           display: "flex",
           gap: 10,

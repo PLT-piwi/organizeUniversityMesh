@@ -30,6 +30,12 @@
     "appId": "com.organizadormallas.app",
     "productName": "Organizador de Mallas",
     "icon": "build/icon.png",
+    "extraResources": [
+    {
+      "from": "build/icon.ico",
+      "to": "icon.ico"
+    }
+  ],
     "directories": {
       "output": "release"
     },

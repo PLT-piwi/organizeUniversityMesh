@@ -30,19 +30,38 @@ export default function MallaCurricular() {
         />
 
         <Notification notification={m.notification} />
+        <CategoryManagerModal />
         <ConfirmDeleteCourseModal />
         <ConfirmDeleteCategoryModal />
         <ConfirmClearAllCoursesModal />
-        <CategoryManagerModal />
+        
 
         <Header />
         <ProgressStrip />
 
-        <div style={{ maxWidth: 1500, margin: "0 auto", padding: "18px" }}>
-          {m.activeTab === "malla" && <MallaTab />}
-          {m.activeTab === "progreso" && <ProgresoTab />}
-          {m.activeTab === "ramos" && <RamosTab />}
+        <div style={{ flexGrow: 1 }}>
+          <div style={{ maxWidth: 1500, margin: "0 auto", padding: "18px" }}>
+            {m.activeTab === "malla" && <MallaTab />}
+            {m.activeTab === "progreso" && <ProgresoTab />}
+            {m.activeTab === "ramos" && <RamosTab />}
+          </div>
         </div>
+        <footer
+          style={{
+            borderTop: "1px solid #E8ECF0",
+            padding: "10px 18px",
+            textAlign: "center",
+            fontSize: 11,
+            color: "#94A3B8",
+            background: "#fff",
+            marginTop: 24,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          © {new Date().getFullYear()} Malla Curricular · Todos los derechos
+          reservados Daniel Solano Godoy
+        </footer>
       </div>
     </MallaContext.Provider>
   );

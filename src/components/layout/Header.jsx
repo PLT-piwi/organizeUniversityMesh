@@ -50,14 +50,14 @@ export function Header() {
             width: 28,
             height: 28,
             background: "linear-gradient(135deg,#6366F1,#FB923C)",
-            borderRadius: 7,
+            borderRadius: 10,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
           }}
         >
-          <span style={{ color: "#fff", fontSize: 14 }}>⬡</span>
+          <img src="../../build/icon.ico" alt="icono" style={{ width: 30, height: 30 }} />
         </div>
         {editingName ? (
           <input

@@ -225,7 +225,7 @@ export function RamosTab() {
                   marginBottom: 3,
                 }}
               >
-                Código *
+                Sigla *
               </label>
               <input
                 value={newCourse.code}
@@ -248,12 +248,36 @@ export function RamosTab() {
               </label>
               <input
                 type="number"
-                min="1"
-                max="25"
                 value={newCourse.credits}
-                onChange={(e) =>
-                  setNewCourse({ ...newCourse, credits: +e.target.value })
-                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Solo acepta dígitos
+                  if (/^\d*$/.test(value)) {
+                    setNewCourse({
+                      ...newCourse,
+                      credits: value === "" ? "" : parseInt(value, 10),
+                    });
+                  }
+                }}
+                onKeyDown={(e) => {
+                  // Bloquea cualquier tecla que no sea número
+                  if (
+                    !/[0-9]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Delete" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight" &&
+                    e.key !== "Tab"
+                  ) {
+                    e.preventDefault();
+                  }
+                  if (
+                    newCourse.credits?.toString().length >= 2 &&
+                    /[0-9]/.test(e.key)
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
             <div>

@@ -137,6 +137,7 @@ export function RamosTab() {
                 credits: 5,
                 category: categories[0]?.id || "diseno",
                 prereqs: [],
+                coreqs: [],
               });
             }}
             style={btnStyle(
@@ -332,7 +333,7 @@ export function RamosTab() {
               {courses
                 .filter((c) => !editingCourse || c.id !== editingCourse)
                 .map((c) => {
-                  const sel = newCourse.prereqs.includes(c.id);
+                  const sel = (newCourse.prereqs ?? []).includes(c.id);
                   const col = getColor(c.category);
                   return (
                     <button
@@ -341,8 +342,69 @@ export function RamosTab() {
                         setNewCourse((prev) => ({
                           ...prev,
                           prereqs: sel
-                            ? prev.prereqs.filter((p) => p !== c.id)
-                            : [...prev.prereqs, c.id],
+                            ? (prev.prereqs ?? []).filter((p) => p !== c.id)
+                            : [...(prev.prereqs ?? []), c.id],
+                          coreqs: (prev.coreqs ?? []).filter((p) => p !== c.id),
+                        }))
+                      }
+                      style={{
+                        fontSize: 11,
+                        padding: "3px 8px",
+                        borderRadius: 6,
+                        cursor: "pointer",
+                        fontFamily: "'DM Mono',monospace",
+                        fontWeight: 500,
+                        border: `1.5px solid ${sel ? col.border : "#E2E8F0"}`,
+                        background: sel ? col.badge : "#fff",
+                        color: sel ? col.text : "#94A3B8",
+                        transition: "all .12s",
+                      }}
+                    >
+                      {c.code}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+          <div style={{ marginBottom: 12 }}>
+            <label
+              style={{
+                fontSize: 11,
+                color: "#64748B",
+                display: "block",
+                marginBottom: 5,
+              }}
+            >
+              Correquisitos
+            </label>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 5,
+                background: "#F8F9FA",
+                borderRadius: 8,
+                padding: 9,
+                border: "1px solid #E2E8F0",
+                maxHeight: 120,
+                overflowY: "auto",
+              }}
+            >
+              {courses
+                .filter((c) => !editingCourse || c.id !== editingCourse)
+                .map((c) => {
+                  const sel = (newCourse.coreqs ?? []).includes(c.id);
+                  const col = getColor(c.category);
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() =>
+                        setNewCourse((prev) => ({
+                          ...prev,
+                          coreqs: sel
+                            ? (prev.coreqs ?? []).filter((p) => p !== c.id)
+                            : [...(prev.coreqs ?? []), c.id],
+                          prereqs: (prev.prereqs ?? []).filter((p) => p !== c.id),
                         }))
                       }
                       style={{
@@ -478,7 +540,7 @@ export function RamosTab() {
                   <div style={{ fontSize: 11, color: "#94A3B8" }}>
                     {semName} · {c.credits} cr.
                   </div>
-                  {c.prereqs.length > 0 && (
+                  {(c.prereqs ?? []).length > 0 && (
                     <div
                       style={{
                         marginTop: 5,
@@ -487,7 +549,7 @@ export function RamosTab() {
                         flexWrap: "wrap",
                       }}
                     >
-                      {c.prereqs.map((pid) => {
+                      {(c.prereqs ?? []).map((pid) => {
                         const pc = getCourse(pid);
                         return pc ? (
                           <span
@@ -502,6 +564,35 @@ export function RamosTab() {
                             }}
                           >
                             → {pc.code}
+                          </span>
+                        ) : null;
+                      })}
+                    </div>
+                  )}
+                  {(c.coreqs ?? []).length > 0 && (
+                    <div
+                      style={{
+                        marginTop: 5,
+                        display: "flex",
+                        gap: 4,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {(c.coreqs ?? []).map((pid) => {
+                        const pc = getCourse(pid);
+                        return pc ? (
+                          <span
+                            key={pid}
+                            style={{
+                              fontSize: 9,
+                              padding: "1px 5px",
+                              borderRadius: 4,
+                              background: "#ECFEFF",
+                              color: "#0E7490",
+                              fontFamily: "'DM Mono',monospace",
+                            }}
+                          >
+                            Co: {pc.code}
                           </span>
                         ) : null;
                       })}

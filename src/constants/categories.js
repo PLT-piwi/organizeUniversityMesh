@@ -6,18 +6,23 @@ export const DEFAULT_CATEGORIES = [
   },
   {
     "id": "ciencias",
-    "label": "Plan común",
-    "colorId": "purple"
+    "label": "Matemáticas y Ciencias Básicas",
+    "colorId": "amber"
   },
   {
     "id": "gestion",
     "label": "Minor",
-    "colorId": "amber"
+    "colorId": "lime"
   },
   {
     "id": "cat_1780018257707",
     "label": "Formación general",
-    "colorId": "blue"
+    "colorId": "indigo"
+  },
+  {
+    "id": "cat_1780268634615",
+    "label": "Fundamentos de Ingenería",
+    "colorId": "cyan"
   }
 ];
 

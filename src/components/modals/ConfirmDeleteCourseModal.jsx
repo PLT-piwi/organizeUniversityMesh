@@ -9,7 +9,11 @@ export function ConfirmDeleteCourseModal() {
   if (!confirmDelete) return null;
 
   const course = getCourse(confirmDelete);
-  const dependents = courses.filter((c) => c.prereqs.includes(confirmDelete));
+  const dependents = courses.filter(
+    (c) =>
+      (c.prereqs ?? []).includes(confirmDelete) ||
+      (c.coreqs ?? []).includes(confirmDelete),
+  );
   const blocked = dependents.length > 0;
 
   return (
@@ -22,16 +26,16 @@ export function ConfirmDeleteCourseModal() {
           color: "#1A1A2E",
         }}
       >
-        {blocked ? "No se puede eliminar" : "¿Eliminar ramo?"}
+        {blocked ? "No se puede eliminar" : "Eliminar ramo?"}
       </div>
       <div style={{ fontSize: 13, color: "#64748B", marginBottom: 12 }}>
         {blocked ? (
           <>
-            «{course?.name}» es prerequisito de ramos posteriores. Elimínalos o
-            quita el prerequisito antes de borrar este ramo.
+            "{course?.name}" es requisito de otros ramos. Eliminalos o quita el
+            requisito antes de borrar este ramo.
           </>
         ) : (
-          <>«{course?.name}» será eliminado permanentemente.</>
+          <> "{course?.name}" sera eliminado permanentemente.</>
         )}
       </div>
       {blocked && (

@@ -33,6 +33,7 @@ export function useMallaCurricular() {
     credits: 5,
     category: categories[0]?.id || "diseno",
     prereqs: [],
+    coreqs: [],
   });
   const [filterCat, setFilterCat] = useState("all");
   const [confirmDelete, setConfirmDelete] = useState(null);
@@ -96,12 +97,37 @@ export function useMallaCurricular() {
         return;
       }
     }
+
+    // Validar que los correquisitos estén en el mismo semestre o antes
+    for (const coreqId of course?.coreqs ?? []) {
+      const coreqSemIndex = semesters.findIndex((s) =>
+        s.courses.includes(coreqId)
+      );
+      if (coreqSemIndex !== -1 && coreqSemIndex > toIndex) {
+        const coreqName = getCourse(coreqId)?.name ?? coreqId;
+        notify(`"${course.name}" requiere "${coreqName}" como correquisito en este semestre o uno anterior`, "warning");
+        setDragging(null);
+        setDragOver(null);
+        return;
+      }
+    }
   
     // Validar que los ramos que dependen de este no queden en semestres anteriores o iguales
-    for (const dep of courses.filter((c) => c.prereqs.includes(courseId))) {
+    for (const dep of courses.filter((c) => (c.prereqs ?? []).includes(courseId))) {
       const depSemIndex = semesters.findIndex((s) => s.courses.includes(dep.id));
       if (depSemIndex !== -1 && depSemIndex <= toIndex) {
         notify(`"${dep.name}" depende de "${course.name}", muévelo a un semestre posterior primero`, "warning");
+        setDragging(null);
+        setDragOver(null);
+        return;
+      }
+    }
+
+    // Validar que los ramos que lo usan como correquisito no queden antes
+    for (const dep of courses.filter((c) => (c.coreqs ?? []).includes(courseId))) {
+      const depSemIndex = semesters.findIndex((s) => s.courses.includes(dep.id));
+      if (depSemIndex !== -1 && depSemIndex < toIndex) {
+        notify(`"${dep.name}" usa "${course.name}" como correquisito, déjalo en el mismo semestre o antes`, "warning");
         setDragging(null);
         setDragOver(null);
         return;
@@ -146,7 +172,7 @@ export function useMallaCurricular() {
     const next = new Set(approved);
     if (next.has(courseId)) {
       const dep = courses.find(
-        (x) => x.prereqs.includes(courseId) && next.has(x.id),
+        (x) => (x.prereqs ?? []).includes(courseId) && next.has(x.id),
       );
       if (dep) {
         notify(`"${dep.name}" depende de este ramo`, "warning");
@@ -154,7 +180,7 @@ export function useMallaCurricular() {
       }
       next.delete(courseId);
     } else {
-      const missing = c.prereqs.filter((p) => !next.has(p));
+      const missing = (c.prereqs ?? []).filter((p) => !next.has(p));
       if (missing.length) {
         notify(
           `Prerequisitos pendientes: ${missing.map((p) => getCourse(p)?.name).join(", ")}`,
@@ -173,9 +199,11 @@ export function useMallaCurricular() {
     if (hoveredCourse === courseId) return "self";
     const hc = getCourse(hoveredCourse);
     if (!hc) return null;
-    if (hc.prereqs.includes(courseId)) return "prereq";
+    if ((hc.prereqs ?? []).includes(courseId)) return "prereq";
+    if ((hc.coreqs ?? []).includes(courseId)) return "coreq";
     const tc = getCourse(courseId);
-    if (tc?.prereqs.includes(hoveredCourse)) return "dependent";
+    if ((tc?.prereqs ?? []).includes(hoveredCourse)) return "dependent";
+    if ((tc?.coreqs ?? []).includes(hoveredCourse)) return "dependent";
     return null;
   };
 
@@ -195,7 +223,7 @@ export function useMallaCurricular() {
       const id = `c${Date.now()}`;
       setCourses((prev) => [
         ...prev,
-        { id, ...newCourse, prereqs: newCourse.prereqs || [] },
+        { id, ...newCourse, prereqs: newCourse.prereqs || [], coreqs: newCourse.coreqs || [] },
       ]);
       notify("Ramo agregado");
     }
@@ -205,6 +233,7 @@ export function useMallaCurricular() {
       credits: 5,
       category: categories[0]?.id || "diseno",
       prereqs: [],
+      coreqs: [],
     });
     setShowAddCourse(false);
   };
@@ -215,16 +244,19 @@ export function useMallaCurricular() {
       code: c.code,
       credits: c.credits,
       category: c.category,
-      prereqs: [...c.prereqs],
+      prereqs: [...(c.prereqs ?? [])],
+      coreqs: [...(c.coreqs ?? [])],
     });
     setShowAddCourse(true);
     setActiveTab("ramos");
   };
   const deleteCourse = (courseId) => {
-    const dependents = courses.filter((c) => c.prereqs.includes(courseId));
+    const dependents = courses.filter(
+      (c) => (c.prereqs ?? []).includes(courseId) || (c.coreqs ?? []).includes(courseId),
+    );
     if (dependents.length) {
       notify(
-        `No se puede eliminar: ${dependents.map((d) => `"${d.name}"`).join(", ")} lo requiere como prerequisito`,
+        `No se puede eliminar: ${dependents.map((d) => `"${d.name}"`).join(", ")} lo requiere como requisito`,
         "warning",
       );
       setConfirmDelete(null);

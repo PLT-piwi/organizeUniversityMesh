@@ -28,7 +28,7 @@
   },
   "build": {
     "appId": "com.organizadormallas.app",
-    "productName": "Organizador de Mallas",
+    "productName": "Chiric",
     "icon": "build/icon.png",
     "extraResources": [
     {

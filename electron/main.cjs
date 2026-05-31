@@ -8,7 +8,7 @@ function createWindow() {
     minWidth: 900,
     minHeight: 600,
     autoHideMenuBar: true,
-    title: "Organizador de Mallas",
+    title: "Chiric",
     icon: app.isPackaged 
   ? path.join(process.resourcesPath, "icon.ico")
   : path.join(__dirname, "../build/icon.ico"),

@@ -45,6 +45,8 @@ export function useMallaCurricular() {
   const [catForm, setCatForm] = useState({ label: "", colorId: "teal" });
   const [confirmDeleteCat, setConfirmDeleteCat] = useState(null);
   const [confirmClearAll, setConfirmClearAll] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetVersion, setResetVersion] = useState(0);
 
   useEffect(() => {
     saveState({
@@ -417,7 +419,9 @@ export function useMallaCurricular() {
     e.target.value = "";
   };
   const resetAll = () => {
-    if (!confirm("¿Resetear toda la malla al estado inicial?")) return;
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setCourses(INITIAL_COURSES);
     setSemesters(INITIAL_SEMESTERS);
     setApproved(new Set());
@@ -438,6 +442,8 @@ export function useMallaCurricular() {
     setCatForm({ label: "", colorId: "teal" });
     setConfirmDeleteCat(null);
     setConfirmClearAll(false);
+    setConfirmReset(false);
+    setResetVersion((version) => version + 1);
     notify("Malla reseteada");
   };
 
@@ -467,6 +473,8 @@ export function useMallaCurricular() {
     catForm, setCatForm,
     confirmDeleteCat, setConfirmDeleteCat,
     confirmClearAll, setConfirmClearAll,
+    confirmReset, setConfirmReset,
+    resetVersion,
     notify,
     getCourse,
     getColor,

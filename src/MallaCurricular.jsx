@@ -4,6 +4,7 @@ import { Notification } from "./components/ui/Notification.jsx";
 import { ConfirmDeleteCourseModal } from "./components/modals/ConfirmDeleteCourseModal.jsx";
 import { ConfirmDeleteCategoryModal } from "./components/modals/ConfirmDeleteCategoryModal.jsx";
 import { ConfirmClearAllCoursesModal } from "./components/modals/ConfirmClearAllCoursesModal.jsx";
+import { ConfirmResetModal } from "./components/modals/ConfirmResetModal.jsx";
 import { CategoryManagerModal } from "./components/modals/CategoryManagerModal.jsx";
 import { Header } from "./components/layout/Header.jsx";
 import { ProgressStrip } from "./components/layout/ProgressStrip.jsx";
@@ -36,15 +37,21 @@ export default function MallaCurricular() {
         <ConfirmDeleteCourseModal />
         <ConfirmDeleteCategoryModal />
         <ConfirmClearAllCoursesModal />
+        <ConfirmResetModal />
 
-        <Header />
-        <ProgressStrip />
+        <div
+          key={m.resetVersion}
+          style={{ display: "flex", flexDirection: "column", flex: 1 }}
+        >
+          <Header />
+          <ProgressStrip />
 
-        <div style={{ flex: 1 }}>
-          <div style={{ maxWidth: 1500, margin: "0 auto", padding: "18px" }}>
-            {m.activeTab === "malla" && <MallaTab />}
-            {m.activeTab === "progreso" && <ProgresoTab />}
-            {m.activeTab === "ramos" && <RamosTab />}
+          <div style={{ flex: 1 }}>
+            <div style={{ maxWidth: 1500, margin: "0 auto", padding: "18px" }}>
+              {m.activeTab === "malla" && <MallaTab />}
+              {m.activeTab === "progreso" && <ProgresoTab />}
+              {m.activeTab === "ramos" && <RamosTab />}
+            </div>
           </div>
         </div>
         <footer

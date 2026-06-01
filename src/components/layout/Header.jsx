@@ -13,9 +13,9 @@ export function Header() {
     setShowCatManager,
     setEditingCat,
     setCatForm,
+    setConfirmReset,
     importJSON,
     exportJSON,
-    resetAll,
   } = useMalla();
 
   const [zoom, setZoom] = useState(() => {
@@ -242,7 +242,7 @@ export function Header() {
             ↓ Exportar
           </button>
           <button
-            onClick={resetAll}
+            onClick={() => setConfirmReset(true)}
             style={{
               fontSize: 12,
               padding: "4px 10px",

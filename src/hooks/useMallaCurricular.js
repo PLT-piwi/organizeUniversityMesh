@@ -6,6 +6,15 @@ import { INITIAL_SEMESTERS } from "../data/initialSemesters.js";
 import { getCatColor } from "../utils/categories.js";
 import { loadState, saveState } from "../utils/storage.js";
 
+const emptyCourseForm = (categories) => ({
+  name: "",
+  code: "",
+  credits: 5,
+  category: categories[0]?.id || "diseno",
+  prereqs: [],
+  coreqs: [],
+});
+
 export function useMallaCurricular() {
   const saved = loadState();
   const [courses, setCourses] = useState(saved?.courses || INITIAL_COURSES);
@@ -27,14 +36,7 @@ export function useMallaCurricular() {
   const [notification, setNotification] = useState(null);
   const [showAddCourse, setShowAddCourse] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
-  const [newCourse, setNewCourse] = useState({
-    name: "",
-    code: "",
-    credits: 5,
-    category: categories[0]?.id || "diseno",
-    prereqs: [],
-    coreqs: [],
-  });
+  const [newCourse, setNewCourse] = useState(emptyCourseForm(categories));
   const [filterCat, setFilterCat] = useState("all");
   const [confirmDelete, setConfirmDelete] = useState(null);
   // Category manager
@@ -227,14 +229,7 @@ export function useMallaCurricular() {
       ]);
       notify("Ramo agregado");
     }
-    setNewCourse({
-      name: "",
-      code: "",
-      credits: 5,
-      category: categories[0]?.id || "diseno",
-      prereqs: [],
-      coreqs: [],
-    });
+    setNewCourse(emptyCourseForm(categories));
     setShowAddCourse(false);
   };
   const startEdit = (c) => {
@@ -428,6 +423,21 @@ export function useMallaCurricular() {
     setApproved(new Set());
     setCategories(DEFAULT_CATEGORIES);
     setCareerName("Nombre de Malla");
+    setEditingName(false);
+    setDragging(null);
+    setDragOver(null);
+    setHoveredCourse(null);
+    setActiveTab("malla");
+    setShowAddCourse(false);
+    setEditingCourse(null);
+    setNewCourse(emptyCourseForm(DEFAULT_CATEGORIES));
+    setFilterCat("all");
+    setConfirmDelete(null);
+    setShowCatManager(false);
+    setEditingCat(null);
+    setCatForm({ label: "", colorId: "teal" });
+    setConfirmDeleteCat(null);
+    setConfirmClearAll(false);
     notify("Malla reseteada");
   };
 

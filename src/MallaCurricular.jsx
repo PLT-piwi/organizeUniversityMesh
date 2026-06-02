@@ -8,6 +8,7 @@ import { ConfirmResetModal } from "./components/modals/ConfirmResetModal.jsx";
 import { CategoryManagerModal } from "./components/modals/CategoryManagerModal.jsx";
 import { Header } from "./components/layout/Header.jsx";
 import { ProgressStrip } from "./components/layout/ProgressStrip.jsx";
+import { FloatingDonateButton } from "./components/layout/FloatingDonateButton.jsx";
 import { MallaTab } from "./components/tabs/MallaTab.jsx";
 import { ProgresoTab } from "./components/tabs/ProgresoTab.jsx";
 import { RamosTab } from "./components/tabs/RamosTab.jsx";
@@ -38,6 +39,7 @@ export default function MallaCurricular() {
         <ConfirmDeleteCategoryModal />
         <ConfirmClearAllCoursesModal />
         <ConfirmResetModal />
+        <FloatingDonateButton />
 
         <div
           key={m.resetVersion}

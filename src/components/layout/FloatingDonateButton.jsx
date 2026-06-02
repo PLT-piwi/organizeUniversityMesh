@@ -50,8 +50,7 @@ export function FloatingDonateButton() {
         aria-label="Abrir opciones para apoyar el proyecto"
         aria-expanded={isOpen}
       >
-        <span className="donate-fab__icon">$</span>
-        <span className="donate-fab__text">Invitame un cafe</span>
+        <span className="donate-fab__icon" aria-hidden="true">☕</span>
       </button>
     </div>
   );

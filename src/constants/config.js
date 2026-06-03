@@ -7,12 +7,12 @@ export const DONATION_OPTIONS = [
     url: "https://ko-fi.com/ds752607",
   },
   {
-    label: "Apoyo",
+    label: "Pizza",
     amount: "$3.000 CLP",
     url: "https://ko-fi.com/ds752607",
   },
   {
-    label: "Mega apoyo",
+    label: "Combo completo",
     amount: "$5.000 CLP",
     url: "https://ko-fi.com/ds752607",
   },

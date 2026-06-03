@@ -121,7 +121,7 @@ select:focus {
   padding: 0;
   border: 1px solid rgba(219, 39, 119, 0.18);
   border-radius: 50%;
-  background: linear-gradient(135deg, #db2777, #f97316);
+  background: linear-gradient(135deg, #276fdb, #16b9f9);
   color: #fff;
   box-shadow: 0 12px 26px rgba(219, 39, 119, 0.24);
   cursor: pointer;

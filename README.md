@@ -5,8 +5,8 @@ Aplicación React para gestionar una malla curricular (ramos, semestres, categor
 ## Cómo ejecutar
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Abre la URL que muestra Vite (normalmente `http://localhost:5173`).
@@ -42,17 +42,17 @@ src/
 
 | Comando | Uso |
 |---------|-----|
-| `npm run dev` | Desarrollo con recarga |
-| `npm run build` | Genera `dist/` para publicar o empaquetar |
-| `npm run preview` | Prueba el build en local |
+| `pnpm run dev` | Desarrollo con recarga |
+| `pnpm run build` | Genera `dist/` para publicar o empaquetar |
+| `pnpm run preview` | Prueba el build en local |
 
 ## .exe descargable (Windows + GitHub)
 
 Guía completa: **[docs/EXE-GITHUB.md](docs/EXE-GITHUB.md)**
 
 ```bash
-npm install
-npm run dist:win          # .exe local en carpeta release/
+pnpm install
+pnpm run dist:win          # .exe local en carpeta release/
 ```
 
 En GitHub: sube el repo, crea tag `v1.0.0` y en **Releases** aparece el instalador.

@@ -16,6 +16,9 @@ export function Header() {
     setConfirmReset,
     importJSON,
     exportJSON,
+    darkMode,
+    toggleDarkMode,
+    theme,
   } = useMalla();
 
   const [zoom, setZoom] = useState(() => {
@@ -30,8 +33,8 @@ export function Header() {
   return (
     <div
       style={{
-        background: "#fff",
-        borderBottom: "1px solid #E8ECF0",
+        background: theme.surface,
+        borderBottom: `1px solid ${theme.border}`,
         padding: "0 18px",
       }}
     >
@@ -72,6 +75,7 @@ export function Header() {
               border: "none",
               outline: "none",
               background: "transparent",
+              color: theme.textPrimary,
               width: 360,
               padding: 0,
             }}
@@ -82,37 +86,69 @@ export function Header() {
               fontSize: 15,
               fontWeight: 600,
               cursor: "pointer",
-              color: "#1A1A2E",
+              color: theme.textPrimary,
             }}
             onClick={() => setEditingName(true)}
             title="Editar nombre"
           >
             {careerName}{" "}
-            <span style={{ fontSize: 11, color: "#CBD5E1" }}>✎</span>
+            <span style={{ fontSize: 11, color: theme.textMuted }}>✎</span>
           </span>
         )}
-        <div style={{ display: "flex", gap: 2, marginLeft: "auto" }}>
-          {[
-            ["malla", "🗺 Malla"],
-            ["progreso", "📊 Progreso"],
-            ["ramos", "📚 Ramos"],
-          ].map(([t, l]) => (
-            <button
-              key={t}
-              className="tab"
-              onClick={() => setActiveTab(t)}
-              style={{
-                padding: "4px 13px",
-                borderRadius: 7,
-                fontSize: 12,
-                fontWeight: 500,
-                background: activeTab === t ? "#6366F1" : "transparent",
-                color: activeTab === t ? "#fff" : "#64748B",
-              }}
-            >
-              {l}
-            </button>
-          ))}
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            marginLeft: "auto",
+            alignItems: "center",
+          }}
+        >
+          <button
+            onClick={toggleDarkMode}
+            title={darkMode ? "Modo claro" : "Modo oscuro"}
+            aria-label={
+              darkMode ? "Activar modo claro" : "Activar modo oscuro"
+            }
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 7,
+              border: `1px solid ${theme.borderStrong}`,
+              background: theme.subtle,
+              color: theme.textSecondary,
+              cursor: "pointer",
+              fontSize: 13,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+          <div style={{ display: "flex", gap: 2 }}>
+            {[
+              ["malla", "🗺 Malla"],
+              ["progreso", "📊 Progreso"],
+              ["ramos", "📚 Ramos"],
+            ].map(([t, l]) => (
+              <button
+                key={t}
+                className="tab"
+                onClick={() => setActiveTab(t)}
+                style={{
+                  padding: "4px 13px",
+                  borderRadius: 7,
+                  fontSize: 12,
+                  fontWeight: 500,
+                  background: activeTab === t ? "#6366F1" : "transparent",
+                  color: activeTab === t ? "#fff" : theme.textSecondary,
+                }}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div
@@ -122,8 +158,8 @@ export function Header() {
             gap: 2,
             marginRight: 5,
             padding: "2px 4px",
-            background: "#F8FAFC",
-            border: "1px solid #E2E8F0",
+            background: theme.surfaceAlt,
+            border: `1px solid ${theme.borderStrong}`,
             borderRadius: 7,
             height: 28,
           }}
@@ -137,7 +173,7 @@ export function Header() {
               borderRadius: 5,
               background: "transparent",
               cursor: "pointer",
-              color: "#64748B",
+              color: theme.textSecondary,
               fontSize: 12,
               fontWeight: 600,
               padding: 0,
@@ -153,7 +189,7 @@ export function Header() {
               fontSize: 10,
               minWidth: 32,
               textAlign: "center",
-              color: "#475569",
+              color: theme.textSecondary,
               fontWeight: 600,
               userSelect: "none",
             }}
@@ -170,7 +206,7 @@ export function Header() {
               borderRadius: 5,
               background: "transparent",
               cursor: "pointer",
-              color: "#64748B",
+              color: theme.textSecondary,
               fontSize: 12,
               fontWeight: 600,
               padding: 0,
@@ -209,9 +245,9 @@ export function Header() {
               fontSize: 12,
               padding: "4px 10px",
               borderRadius: 7,
-              border: "1px solid #E2E8F0",
-              color: "#64748B",
-              background: "#fff",
+              border: `1px solid ${theme.borderStrong}`,
+              color: theme.textSecondary,
+              background: theme.surface,
               display: "flex",
               alignItems: "center",
               gap: 4,
@@ -232,10 +268,10 @@ export function Header() {
               fontSize: 12,
               padding: "4px 10px",
               borderRadius: 7,
-              border: "1px solid #E2E8F0",
-              color: "#64748B",
+              border: `1px solid ${theme.borderStrong}`,
+              color: theme.textSecondary,
               cursor: "pointer",
-              background: "#fff",
+              background: theme.surface,
               whiteSpace: "nowrap",
             }}
           >

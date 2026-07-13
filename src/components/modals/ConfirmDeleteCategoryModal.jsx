@@ -3,8 +3,14 @@ import { Modal } from "../ui/Modal.jsx";
 import { btnStyle } from "../ui/btnStyle.js";
 
 export function ConfirmDeleteCategoryModal() {
-  const { categories, courses, confirmDeleteCat, setConfirmDeleteCat, deleteCat } =
-    useMalla();
+  const {
+    categories,
+    courses,
+    confirmDeleteCat,
+    setConfirmDeleteCat,
+    deleteCat,
+    theme,
+  } = useMalla();
 
   if (!confirmDeleteCat) return null;
 
@@ -19,12 +25,12 @@ export function ConfirmDeleteCategoryModal() {
           fontSize: 15,
           fontWeight: 600,
           marginBottom: 6,
-          color: "#1A1A2E",
+          color: theme.textPrimary,
         }}
       >
         {blocked ? "No se puede eliminar" : "¿Eliminar categoría?"}
       </div>
-      <div style={{ fontSize: 13, color: "#64748B", marginBottom: 12 }}>
+      <div style={{ fontSize: 13, color: theme.textSecondary, marginBottom: 12 }}>
         {blocked ? (
           <>
             «{cat?.label}» tiene ramos asignados. Cámbialos de categoría o
@@ -60,7 +66,7 @@ export function ConfirmDeleteCategoryModal() {
       >
         <button
           onClick={() => setConfirmDeleteCat(null)}
-          style={btnStyle("ghost")}
+          style={btnStyle("ghost", "md", theme)}
         >
           {blocked ? "Entendido" : "Cancelar"}
         </button>

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { DEFAULT_CATEGORIES } from "../constants/categories.js";
-import { UNASSIGNED_ID } from "../constants/config.js";
+import { UNASSIGNED_ID, DARK_MODE_KEY } from "../constants/config.js";
 import { INITIAL_COURSES } from "../data/initialCourses.js";
 import { INITIAL_SEMESTERS } from "../data/initialSemesters.js";
 import { getCatColor } from "../utils/categories.js";
 import { loadState, saveState } from "../utils/storage.js";
+import { getTheme } from "../constants/theme.js";
 
 const emptyCourseForm = (categories) => ({
   name: "",
@@ -47,6 +48,9 @@ export function useMallaCurricular() {
   const [confirmClearAll, setConfirmClearAll] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const [resetVersion, setResetVersion] = useState(0);
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem(DARK_MODE_KEY) === "1",
+  );
 
   useEffect(() => {
     saveState({
@@ -57,6 +61,15 @@ export function useMallaCurricular() {
       careerName,
     });
   }, [courses, semesters, approved, categories, careerName]);
+
+  useEffect(() => {
+    localStorage.setItem(DARK_MODE_KEY, darkMode ? "1" : "0");
+    document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+    document.documentElement.dataset.theme = darkMode ? "dark" : "light";
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((v) => !v);
+  const theme = getTheme(darkMode);
 
   const notify = (msg, type = "success") => {
     setNotification({ msg, type });
@@ -287,10 +300,6 @@ export function useMallaCurricular() {
   };
 
   // ── CRUD categories ───────────────────────────────────────────────────────
-  const openNewCat = () => {
-    setEditingCat(null);
-    setCatForm({ label: "", colorId: "teal" });
-  };
   const openEditCat = (cat) => {
     setEditingCat(cat.id);
     setCatForm({ label: cat.label, colorId: cat.colorId });
@@ -475,6 +484,9 @@ export function useMallaCurricular() {
     confirmClearAll, setConfirmClearAll,
     confirmReset, setConfirmReset,
     resetVersion,
+    darkMode,
+    toggleDarkMode,
+    theme,
     notify,
     getCourse,
     getColor,
@@ -488,7 +500,6 @@ export function useMallaCurricular() {
     startEdit,
     deleteCourse,
     clearAllCourses,
-    openNewCat,
     openEditCat,
     saveCat,
     deleteCat,

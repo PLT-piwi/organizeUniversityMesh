@@ -8,26 +8,9 @@ export function RamosTab() {
   const m = useMalla();
   const {
     courses,
-    setCourses,
     semesters,
-    setSemesters,
     approved,
-    setApproved,
     categories,
-    setCategories,
-    careerName,
-    setCareerName,
-    editingName,
-    setEditingName,
-    dragging,
-    setDragging,
-    dragOver,
-    setDragOver,
-    hoveredCourse,
-    setHoveredCourse,
-    activeTab,
-    setActiveTab,
-    notification,
     showAddCourse,
     setShowAddCourse,
     editingCourse,
@@ -36,43 +19,15 @@ export function RamosTab() {
     setNewCourse,
     filterCat,
     setFilterCat,
-    confirmDelete,
     setConfirmDelete,
-    showCatManager,
-    setShowCatManager,
-    editingCat,
-    setEditingCat,
-    catForm,
-    setCatForm,
-    confirmDeleteCat,
-    setConfirmDeleteCat,
     setConfirmClearAll,
-    notify,
     getCourse,
     getColor,
-    unassignedIds,
-    handleDragStart,
-    handleDrop,
-    handleDropUnassigned,
     toggleApproved,
-    getHighlighted,
     saveCourse,
     startEdit,
-    deleteCourse,
-    openNewCat,
-    openEditCat,
-    saveCat,
-    deleteCat,
-    addSemester,
-    removeSemester,
-    totalCredits,
-    approvedCreds,
-    progress,
-    catStats,
-    exportJSON,
-    importJSON,
-    resetAll,
     filteredCourses,
+    theme,
   } = m;
 
   return (
@@ -95,8 +50,8 @@ export function RamosTab() {
               padding: "4px 11px",
               borderRadius: 7,
               fontSize: 11,
-              background: filterCat === "all" ? "#1A1A2E" : "#F1F5F9",
-              color: filterCat === "all" ? "#fff" : "#64748B",
+              background: filterCat === "all" ? "#6366F1" : theme.subtle,
+              color: filterCat === "all" ? "#fff" : theme.textSecondary,
               fontWeight: 500,
             }}
           >
@@ -116,7 +71,7 @@ export function RamosTab() {
                     borderRadius: 7,
                     fontSize: 11,
                     fontWeight: 500,
-                    background: filterCat === cat.id ? col.border : "#F1F5F9",
+                    background: filterCat === cat.id ? col.border : theme.subtle,
                     color: filterCat === cat.id ? "#fff" : col.text,
                   }}
                 >
@@ -142,6 +97,8 @@ export function RamosTab() {
             }}
             style={btnStyle(
               showAddCourse && !editingCourse ? "ghost" : "primary",
+              "md",
+              theme,
             )}
           >
             {showAddCourse && !editingCourse ? "✕ Cancelar" : "+ Agregar ramo"}
@@ -172,10 +129,10 @@ export function RamosTab() {
         <div
           ref={editSectionRef}
           style={{
-            background: "#fff",
+            background: theme.surface,
             borderRadius: 11,
             padding: 18,
-            border: "1px solid #E8ECF0",
+            border: `1px solid ${theme.border}`,
             marginBottom: 16,
             animation: "fadeIn .15s ease",
           }}
@@ -185,7 +142,7 @@ export function RamosTab() {
               fontSize: 13,
               fontWeight: 600,
               marginBottom: 12,
-              color: "#1A1A2E",
+              color: theme.textPrimary,
             }}
           >
             {editingCourse ? "Editar ramo" : "Nuevo ramo"}
@@ -202,7 +159,7 @@ export function RamosTab() {
               <label
                 style={{
                   fontSize: 11,
-                  color: "#64748B",
+                  color: theme.textSecondary,
                   display: "block",
                   marginBottom: 3,
                 }}
@@ -221,7 +178,7 @@ export function RamosTab() {
               <label
                 style={{
                   fontSize: 11,
-                  color: "#64748B",
+                  color: theme.textSecondary,
                   display: "block",
                   marginBottom: 3,
                 }}
@@ -240,7 +197,7 @@ export function RamosTab() {
               <label
                 style={{
                   fontSize: 11,
-                  color: "#64748B",
+                  color: theme.textSecondary,
                   display: "block",
                   marginBottom: 3,
                 }}
@@ -285,7 +242,7 @@ export function RamosTab() {
               <label
                 style={{
                   fontSize: 11,
-                  color: "#64748B",
+                  color: theme.textSecondary,
                   display: "block",
                   marginBottom: 3,
                 }}
@@ -310,7 +267,7 @@ export function RamosTab() {
             <label
               style={{
                 fontSize: 11,
-                color: "#64748B",
+                color: theme.textSecondary,
                 display: "block",
                 marginBottom: 5,
               }}
@@ -322,10 +279,10 @@ export function RamosTab() {
                 display: "flex",
                 flexWrap: "wrap",
                 gap: 5,
-                background: "#F8F9FA",
+                background: theme.surfaceAlt,
                 borderRadius: 8,
                 padding: 9,
-                border: "1px solid #E2E8F0",
+                border: `1px solid ${theme.borderStrong}`,
                 maxHeight: 120,
                 overflowY: "auto",
               }}
@@ -354,9 +311,9 @@ export function RamosTab() {
                         cursor: "pointer",
                         fontFamily: "'DM Mono',monospace",
                         fontWeight: 500,
-                        border: `1.5px solid ${sel ? col.border : "#E2E8F0"}`,
-                        background: sel ? col.badge : "#fff",
-                        color: sel ? col.text : "#94A3B8",
+                        border: `1.5px solid ${sel ? col.border : theme.borderStrong}`,
+                        background: sel ? col.badge : theme.surface,
+                        color: sel ? col.text : theme.textMuted,
                         transition: "all .12s",
                       }}
                     >
@@ -370,7 +327,7 @@ export function RamosTab() {
             <label
               style={{
                 fontSize: 11,
-                color: "#64748B",
+                color: theme.textSecondary,
                 display: "block",
                 marginBottom: 5,
               }}
@@ -382,10 +339,10 @@ export function RamosTab() {
                 display: "flex",
                 flexWrap: "wrap",
                 gap: 5,
-                background: "#F8F9FA",
+                background: theme.surfaceAlt,
                 borderRadius: 8,
                 padding: 9,
-                border: "1px solid #E2E8F0",
+                border: `1px solid ${theme.borderStrong}`,
                 maxHeight: 120,
                 overflowY: "auto",
               }}
@@ -414,9 +371,9 @@ export function RamosTab() {
                         cursor: "pointer",
                         fontFamily: "'DM Mono',monospace",
                         fontWeight: 500,
-                        border: `1.5px solid ${sel ? col.border : "#E2E8F0"}`,
-                        background: sel ? col.badge : "#fff",
-                        color: sel ? col.text : "#94A3B8",
+                        border: `1.5px solid ${sel ? col.border : theme.borderStrong}`,
+                        background: sel ? col.badge : theme.surface,
+                        color: sel ? col.text : theme.textMuted,
                         transition: "all .12s",
                       }}
                     >
@@ -435,7 +392,7 @@ export function RamosTab() {
                 setShowAddCourse(false);
                 setEditingCourse(null);
               }}
-              style={btnStyle("ghost", "sm")}
+              style={btnStyle("ghost", "sm", theme)}
             >
               Cancelar
             </button>
@@ -463,10 +420,10 @@ export function RamosTab() {
             <div
               key={c.id}
               style={{
-                background: "#fff",
+                background: theme.surface,
                 borderRadius: 10,
                 padding: 13,
-                border: `1px solid ${isApp ? "#BBF7D0" : "#E8ECF0"}`,
+                border: `1px solid ${isApp ? theme.approvedBorder : theme.border}`,
                 transition: "border-color .15s",
               }}
             >
@@ -530,14 +487,14 @@ export function RamosTab() {
                     style={{
                       fontSize: 13,
                       fontWeight: 500,
-                      color: "#1A1A2E",
+                      color: theme.textPrimary,
                       lineHeight: 1.35,
                       marginBottom: 3,
                     }}
                   >
                     {c.name}
                   </div>
-                  <div style={{ fontSize: 11, color: "#94A3B8" }}>
+                  <div style={{ fontSize: 11, color: theme.textMuted }}>
                     {semName} · {c.credits} cr.
                   </div>
                   {(c.prereqs ?? []).length > 0 && (
@@ -558,8 +515,8 @@ export function RamosTab() {
                               fontSize: 9,
                               padding: "1px 5px",
                               borderRadius: 4,
-                              background: "#F1F5F9",
-                              color: "#64748B",
+                              background: theme.subtle,
+                              color: theme.textSecondary,
                               fontFamily: "'DM Mono',monospace",
                             }}
                           >
@@ -614,7 +571,7 @@ export function RamosTab() {
                       width: 24,
                       height: 24,
                       borderRadius: 99,
-                      border: `2px solid ${isApp ? "#22C55E" : "#E2E8F0"}`,
+                      border: `2px solid ${isApp ? "#22C55E" : theme.borderStrong}`,
                       background: isApp ? "#22C55E" : "transparent",
                       cursor: "pointer",
                       fontSize: 12,
@@ -669,7 +626,7 @@ export function RamosTab() {
                         }
                       }, 150);
                     }}
-                    style={{ fontSize: 12, color: "#94A3B8" }}
+                    style={{ fontSize: 12, color: theme.textMuted }}
                   >
                     ✎
                   </button>

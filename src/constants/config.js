@@ -1,5 +1,6 @@
 export const UNASSIGNED_ID = "unassigned";
 export const STORAGE_KEY = "malla-idi-v3";
+export const DARK_MODE_KEY = "malla-dark-mode";
 export const DONATION_OPTIONS = [
   {
     label: "Cafe",

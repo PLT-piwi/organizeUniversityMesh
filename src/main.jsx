@@ -7,3 +7,11 @@ createRoot(document.getElementById("root")).render(
     <MallaCurricular />
   </StrictMode>,
 );
+
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .catch((err) => console.warn("No se pudo registrar el service worker", err));
+  });
+}

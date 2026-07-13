@@ -18,6 +18,7 @@ export function CategoryManagerModal() {
     openEditCat,
     saveCat,
     setConfirmDeleteCat,
+    theme,
   } = useMalla();
 
   const formRef = useRef(null);
@@ -47,7 +48,7 @@ export function CategoryManagerModal() {
                   marginBottom: 20,
                 }}
               >
-                <div style={{ fontSize: 16, fontWeight: 600, color: "#1A1A2E" }}>
+                <div style={{ fontSize: 16, fontWeight: 600, color: theme.textPrimary }}>
                   Gestionar categorías
                 </div>
                 <button
@@ -55,7 +56,7 @@ export function CategoryManagerModal() {
                     setShowCatManager(false);
                     setEditingCat(null);
                   }}
-                  style={btnStyle("ghost", "sm")}
+                  style={btnStyle("ghost", "sm", theme)}
                 >
                   ✕
                 </button>
@@ -87,12 +88,14 @@ export function CategoryManagerModal() {
                         padding: "9px 12px",
                         paddingRight: 56,
                         background:
-                          editingCat === cat.id ? "#EEF2FF" : "#F8F9FA",
+                          editingCat === cat.id
+                            ? theme.accentSoftBg
+                            : theme.surfaceAlt,
                         borderRadius: 9,
                         border:
                           editingCat === cat.id
                             ? "1px solid #C7D2FE"
-                            : "1px solid #E8ECF0",
+                            : `1px solid ${theme.border}`,
                         position: "relative",
                       }}
                     >
@@ -109,7 +112,7 @@ export function CategoryManagerModal() {
                         style={{
                           fontSize: 13,
                           fontWeight: 500,
-                          color: "#1A1A2E",
+                          color: theme.textPrimary,
                           flex: 1,
                           minWidth: 0,
                         }}
@@ -120,7 +123,7 @@ export function CategoryManagerModal() {
                             style={{
                               marginLeft: 6,
                               fontSize: 9,
-                              color: "#94A3B8",
+                              color: theme.textMuted,
                               fontWeight: 600,
                             }}
                           >
@@ -131,7 +134,7 @@ export function CategoryManagerModal() {
                       <span
                         style={{
                           fontSize: 11,
-                          color: "#94A3B8",
+                          color: theme.textMuted,
                           flexShrink: 0,
                         }}
                       >
@@ -152,7 +155,7 @@ export function CategoryManagerModal() {
                           className="bico"
                           type="button"
                           onClick={() => openEditCat(cat)}
-                          style={{ fontSize: 13, color: "#94A3B8" }}
+                          style={{ fontSize: 13, color: theme.textMuted }}
                           title="Editar categoría"
                         >
                           ✎
@@ -163,7 +166,7 @@ export function CategoryManagerModal() {
                             style={{
                               width: 22,
                               fontSize: 9,
-                              color: "#CBD5E1",
+                              color: theme.textMuted,
                               textAlign: "center",
                               flexShrink: 0,
                               cursor: "help",
@@ -187,22 +190,22 @@ export function CategoryManagerModal() {
                   );
                 })}
               </div>
-    
+
               {/* Add / Edit form */}
               <div
                 ref={formRef}
                 style={{
-                  background: "#F0F4FF",
+                  background: theme.accentSoftBg,
                   borderRadius: 10,
                   padding: 16,
-                  border: "1px solid #E0E7FF",
+                  border: `1px solid ${theme.accentSoftBorder}`,
                 }}
               >
                 <div
                   style={{
                     fontSize: 13,
                     fontWeight: 600,
-                    color: "#4338CA",
+                    color: theme.accentText,
                     marginBottom: 12,
                   }}
                 >
@@ -214,7 +217,7 @@ export function CategoryManagerModal() {
                   <label
                     style={{
                       fontSize: 11,
-                      color: "#64748B",
+                      color: theme.textSecondary,
                       display: "block",
                       marginBottom: 4,
                     }}
@@ -234,7 +237,7 @@ export function CategoryManagerModal() {
                   <label
                     style={{
                       fontSize: 11,
-                      color: "#64748B",
+                      color: theme.textSecondary,
                       display: "block",
                       marginBottom: 8,
                     }}
@@ -299,7 +302,7 @@ export function CategoryManagerModal() {
                         setEditingCat(null);
                         setCatForm({ label: "", colorId: "teal" });
                       }}
-                      style={btnStyle("ghost", "sm")}
+                      style={btnStyle("ghost", "sm", theme)}
                     >
                       Cancelar
                     </button>

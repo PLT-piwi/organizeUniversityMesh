@@ -1,3 +1,11 @@
+html,
+body {
+  background: #f7f8fa;
+}
+:root[data-theme="dark"],
+:root[data-theme="dark"] body {
+  background: #12141a;
+}
 @keyframes pop {
   from {
     transform: translateX(14px);
@@ -101,6 +109,45 @@ select:focus {
 .color-dot.sel {
   border-color: #1a1a2e;
   transform: scale(1.1);
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select {
+  background: #20242d;
+  color: #e7e9ee;
+  border-color: #333844;
+}
+:root[data-theme="dark"] input::placeholder {
+  color: #748099;
+}
+:root[data-theme="dark"] .bico:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #333844;
+}
+:root[data-theme="dark"] .color-dot.sel {
+  border-color: #e7e9ee;
+}
+:root[data-theme="dark"] .donate-panel {
+  background: #1b1f27;
+  border-color: #2b303b;
+}
+:root[data-theme="dark"] .donate-panel__header {
+  color: #e7e9ee;
+}
+:root[data-theme="dark"] .donate-panel__close {
+  background: #242933;
+  color: #a3adc2;
+}
+:root[data-theme="dark"] .donate-panel__close:hover {
+  background: #2b303b;
+  color: #e7e9ee;
+}
+:root[data-theme="dark"] .donate-option {
+  background: #20242d;
+  border-color: #333844;
+  color: #a3adc2;
 }
 .donate-widget {
   position: fixed;

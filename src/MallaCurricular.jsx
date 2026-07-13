@@ -16,13 +16,15 @@ import "./styles/global.css";
 
 export default function MallaCurricular() {
   const m = useMallaCurricular();
+  const { theme } = m;
 
   return (
     <MallaContext.Provider value={m}>
       <div
         style={{
           minHeight: "100vh",
-          background: "#F7F8FA",
+          background: theme.pageBg,
+          color: theme.textPrimary,
           fontFamily: "'DM Sans','Segoe UI',sans-serif",
           display: "flex",
           flexDirection: "column",
@@ -58,12 +60,12 @@ export default function MallaCurricular() {
         </div>
         <footer
           style={{
-            borderTop: "1px solid #E8ECF0",
+            borderTop: `1px solid ${theme.border}`,
             padding: "10px 18px",
             textAlign: "center",
             fontSize: 11,
-            color: "#94A3B8",
-            background: "#fff",
+            color: theme.textMuted,
+            background: theme.surface,
             marginTop: "auto",
             flexShrink: 0,
           }}

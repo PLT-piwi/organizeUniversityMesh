@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CourseCard } from "./CourseCard.jsx";
+import { useMalla } from "../context/MallaContext.jsx";
 
 export function SemesterColumn({
   sem,
@@ -19,6 +20,7 @@ export function SemesterColumn({
   onEdit,
   onDelete,
 }) {
+  const { theme } = useMalla();
   const [editName, setEditName] = useState(false);
   const isDragOver = dragOver === sem.id;
   const semCourses = sem.courses
@@ -68,7 +70,7 @@ export function SemesterColumn({
               background: "transparent",
               width: 108,
               padding: 0,
-              color: "#475569",
+              color: theme.textSecondary,
             }}
           />
         ) : (
@@ -76,7 +78,7 @@ export function SemesterColumn({
             style={{
               fontSize: 11,
               fontWeight: 600,
-              color: allDone ? "#16A34A" : "#475569",
+              color: allDone ? "#16A34A" : theme.textSecondary,
               cursor: "pointer",
               flex: 1,
             }}
@@ -87,11 +89,11 @@ export function SemesterColumn({
           </span>
         )}
         <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-          <span style={{ fontSize: 9, color: "#94A3B8" }}>{semCredits}c</span>
+          <span style={{ fontSize: 9, color: theme.textMuted }}>{semCredits}c</span>
           <button
             className="bico"
             onClick={() => onRemove(sem.id)}
-            style={{ fontSize: 13, color: "#CBD5E1", padding: "1px 3px" }}
+            style={{ fontSize: 13, color: theme.textMuted, padding: "1px 3px" }}
           >
             ×
           </button>
@@ -104,10 +106,10 @@ export function SemesterColumn({
       )}
       <div
         style={{
-          background: isDragOver ? "#EEF2FF" : "#F1F5F9",
+          background: isDragOver ? theme.dropHighlightBg : theme.subtle,
           borderRadius: 10,
           padding: 6,
-          border: `2px ${isDragOver ? "solid #6366F1" : "dashed #E2E8F0"}`,
+          border: `2px ${isDragOver ? "solid #6366F1" : `dashed ${theme.borderStrong}`}`,
           minHeight: 68,
           transition: "all .15s",
         }}
@@ -131,7 +133,7 @@ export function SemesterColumn({
           <div
             style={{
               textAlign: "center",
-              color: "#CBD5E1",
+              color: theme.textMuted,
               fontSize: 10,
               padding: "10px 0",
             }}

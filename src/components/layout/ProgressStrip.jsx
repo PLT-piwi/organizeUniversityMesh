@@ -1,13 +1,14 @@
 import { useMalla } from "../../context/MallaContext.jsx";
 
 export function ProgressStrip() {
-  const { approvedCreds, totalCredits, approved, courses, progress } = useMalla();
+  const { approvedCreds, totalCredits, approved, courses, progress, theme } =
+    useMalla();
 
   return (
     <div
             style={{
-              background: "#fff",
-              borderBottom: "1px solid #E8ECF0",
+              background: theme.surface,
+              borderBottom: `1px solid ${theme.border}`,
               padding: "6px 18px",
             }}
           >
@@ -21,7 +22,7 @@ export function ProgressStrip() {
               }}
             >
               <span
-                style={{ fontSize: 11, color: "#64748B", whiteSpace: "nowrap" }}
+                style={{ fontSize: 11, color: theme.textSecondary, whiteSpace: "nowrap" }}
               >
                 {approvedCreds}/{totalCredits} créditos · {approved.size}/
                 {courses.length} ramos
@@ -30,7 +31,7 @@ export function ProgressStrip() {
                 style={{
                   flex: 1,
                   height: 5,
-                  background: "#E8ECF0",
+                  background: theme.subtle,
                   borderRadius: 99,
                   overflow: "hidden",
                 }}

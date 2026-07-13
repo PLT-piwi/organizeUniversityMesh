@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMalla } from "../context/MallaContext.jsx";
 
 export function CourseCard({
   course,
@@ -12,6 +13,7 @@ export function CourseCard({
   onEdit,
   onDelete,
 }) {
+  const { theme, darkMode } = useMalla();
   const [hover, setHover] = useState(false);
   const borderColor =
     highlighted === "self"
@@ -23,7 +25,7 @@ export function CourseCard({
           : highlighted === "dependent"
             ? "#22C55E"
             : approved
-              ? "#86EFAC"
+              ? theme.approvedBorder
               : col.border + "55";
 
   return (
@@ -40,7 +42,11 @@ export function CourseCard({
         setHover(false);
       }}
       style={{
-        background: approved ? "#F0FDF4" : col.bg,
+        background: approved
+          ? theme.approvedBg
+          : darkMode
+            ? theme.surface
+            : col.bg,
         border: `1.5px solid ${borderColor}`,
         borderRadius: 8,
         padding: "6px 8px",
@@ -121,7 +127,7 @@ export function CourseCard({
             style={{
               fontSize: 11,
               fontWeight: 500,
-              color: "#1A1A2E",
+              color: theme.textPrimary,
               lineHeight: 1.3,
               wordBreak: "break-word",
               paddingRight: 26,
@@ -129,7 +135,7 @@ export function CourseCard({
           >
             {course.name}
           </div>
-          <div style={{ fontSize: 9, color: "#94A3B8", marginTop: 1 }}>
+          <div style={{ fontSize: 9, color: theme.textMuted, marginTop: 1 }}>
             {course.credits} cr.
           </div>
         </div>

@@ -1,4 +1,4 @@
-export function btnStyle(variant = "primary", size = "md") {
+export function btnStyle(variant = "primary", size = "md", theme) {
   const base = {
     cursor: "pointer",
     border: "none",
@@ -14,9 +14,9 @@ export function btnStyle(variant = "primary", size = "md") {
   const variants = {
     primary: { background: "#6366F1", color: "#fff", border: "none" },
     ghost: {
-      background: "#F1F5F9",
-      color: "#64748B",
-      border: "1px solid #E2E8F0",
+      background: theme?.subtle ?? "#F1F5F9",
+      color: theme?.textSecondary ?? "#64748B",
+      border: `1px solid ${theme?.borderStrong ?? "#E2E8F0"}`,
     },
     danger: { background: "#EF4444", color: "#fff", border: "none" },
   };

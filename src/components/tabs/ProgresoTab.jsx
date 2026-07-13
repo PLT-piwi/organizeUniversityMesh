@@ -5,70 +5,12 @@ export function ProgresoTab() {
   const m = useMalla();
   const {
     courses,
-    setCourses,
     semesters,
-    setSemesters,
     approved,
-    setApproved,
-    categories,
-    setCategories,
-    careerName,
-    setCareerName,
-    editingName,
-    setEditingName,
-    dragging,
-    setDragging,
-    dragOver,
-    setDragOver,
-    hoveredCourse,
-    setHoveredCourse,
-    activeTab,
-    setActiveTab,
-    notification,
-    showAddCourse,
-    setShowAddCourse,
-    editingCourse,
-    setEditingCourse,
-    newCourse,
-    setNewCourse,
-    filterCat,
-    setFilterCat,
-    confirmDelete,
-    setConfirmDelete,
-    showCatManager,
-    setShowCatManager,
-    editingCat,
-    setEditingCat,
-    catForm,
-    setCatForm,
-    confirmDeleteCat,
-    setConfirmDeleteCat,
-    notify,
-    getCourse,
-    getColor,
-    unassignedIds,
-    handleDragStart,
-    handleDrop,
-    handleDropUnassigned,
-    toggleApproved,
-    getHighlighted,
-    saveCourse,
-    startEdit,
-    deleteCourse,
-    openNewCat,
-    openEditCat,
-    saveCat,
-    deleteCat,
-    addSemester,
-    removeSemester,
-    totalCredits,
     approvedCreds,
     progress,
     catStats,
-    exportJSON,
-    importJSON,
-    resetAll,
-    filteredCourses,
+    theme,
   } = m;
 
   return (
@@ -95,10 +37,10 @@ export function ProgresoTab() {
                     <div
                       key={s.label}
                       style={{
-                        background: "#fff",
+                        background: theme.surface,
                         borderRadius: 11,
                         padding: "13px 16px",
-                        border: "1px solid #E8ECF0",
+                        border: `1px solid ${theme.border}`,
                       }}
                     >
                       <div style={{ fontSize: 18 }}>{s.icon}</div>
@@ -106,13 +48,13 @@ export function ProgresoTab() {
                         style={{
                           fontSize: 24,
                           fontWeight: 600,
-                          color: "#1A1A2E",
+                          color: theme.textPrimary,
                           marginTop: 2,
                         }}
                       >
                         {s.value}
                       </div>
-                      <div style={{ fontSize: 11, color: "#94A3B8", marginTop: 1 }}>
+                      <div style={{ fontSize: 11, color: theme.textMuted, marginTop: 1 }}>
                         {s.label}
                       </div>
                     </div>
@@ -127,10 +69,10 @@ export function ProgresoTab() {
                 >
                   <div
                     style={{
-                      background: "#fff",
+                      background: theme.surface,
                       borderRadius: 11,
                       padding: 18,
-                      border: "1px solid #E8ECF0",
+                      border: `1px solid ${theme.border}`,
                     }}
                   >
                     <div
@@ -138,7 +80,7 @@ export function ProgresoTab() {
                         fontSize: 13,
                         fontWeight: 600,
                         marginBottom: 14,
-                        color: "#1A1A2E",
+                        color: theme.textPrimary,
                       }}
                     >
                       Por categoría
@@ -177,14 +119,14 @@ export function ProgresoTab() {
                               />
                               {label}
                             </span>
-                            <span style={{ fontSize: 11, color: "#94A3B8" }}>
+                            <span style={{ fontSize: 11, color: theme.textMuted }}>
                               {done}/{total}
                             </span>
                           </div>
                           <div
                             style={{
                               height: 6,
-                              background: "#F1F5F9",
+                              background: theme.subtle,
                               borderRadius: 99,
                               overflow: "hidden",
                             }}
@@ -205,10 +147,10 @@ export function ProgresoTab() {
                   </div>
                   <div
                     style={{
-                      background: "#fff",
+                      background: theme.surface,
                       borderRadius: 11,
                       padding: 18,
-                      border: "1px solid #E8ECF0",
+                      border: `1px solid ${theme.border}`,
                     }}
                   >
                     <div
@@ -216,7 +158,7 @@ export function ProgresoTab() {
                         fontSize: 13,
                         fontWeight: 600,
                         marginBottom: 14,
-                        color: "#1A1A2E",
+                        color: theme.textPrimary,
                       }}
                     >
                       Por semestre
@@ -240,7 +182,7 @@ export function ProgresoTab() {
                           <span
                             style={{
                               fontSize: 11,
-                              color: "#64748B",
+                              color: theme.textSecondary,
                               minWidth: 82,
                               flexShrink: 0,
                             }}
@@ -251,7 +193,7 @@ export function ProgresoTab() {
                             style={{
                               flex: 1,
                               height: 6,
-                              background: "#F1F5F9",
+                              background: theme.subtle,
                               borderRadius: 99,
                               overflow: "hidden",
                             }}
@@ -269,7 +211,7 @@ export function ProgresoTab() {
                           <span
                             style={{
                               fontSize: 11,
-                              color: "#94A3B8",
+                              color: theme.textMuted,
                               minWidth: 32,
                               textAlign: "right",
                             }}

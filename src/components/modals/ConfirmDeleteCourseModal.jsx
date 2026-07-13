@@ -3,8 +3,14 @@ import { Modal } from "../ui/Modal.jsx";
 import { btnStyle } from "../ui/btnStyle.js";
 
 export function ConfirmDeleteCourseModal() {
-  const { courses, confirmDelete, setConfirmDelete, getCourse, deleteCourse } =
-    useMalla();
+  const {
+    courses,
+    confirmDelete,
+    setConfirmDelete,
+    getCourse,
+    deleteCourse,
+    theme,
+  } = useMalla();
 
   if (!confirmDelete) return null;
 
@@ -23,12 +29,12 @@ export function ConfirmDeleteCourseModal() {
           fontSize: 15,
           fontWeight: 600,
           marginBottom: 6,
-          color: "#1A1A2E",
+          color: theme.textPrimary,
         }}
       >
         {blocked ? "No se puede eliminar" : "Eliminar ramo?"}
       </div>
-      <div style={{ fontSize: 13, color: "#64748B", marginBottom: 12 }}>
+      <div style={{ fontSize: 13, color: theme.textSecondary, marginBottom: 12 }}>
         {blocked ? (
           <>
             "{course?.name}" es requisito de otros ramos. Eliminalos o quita el
@@ -63,7 +69,7 @@ export function ConfirmDeleteCourseModal() {
       >
         <button
           onClick={() => setConfirmDelete(null)}
-          style={btnStyle("ghost")}
+          style={btnStyle("ghost", "md", theme)}
         >
           {blocked ? "Entendido" : "Cancelar"}
         </button>

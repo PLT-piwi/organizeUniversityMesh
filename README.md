@@ -48,8 +48,6 @@ src/
 
 ## .exe descargable (Windows + GitHub)
 
-Guía completa: **[docs/EXE-GITHUB.md](docs/EXE-GITHUB.md)**
-
 ```bash
 pnpm install
 pnpm run dist:win          # .exe local en carpeta release/
@@ -57,6 +55,10 @@ pnpm run dist:win          # .exe local en carpeta release/
 
 En GitHub: sube el repo, crea tag `v1.0.0` y en **Releases** aparece el instalador.
 
-## Otras formas de app
+## Instalable en celular (PWA)
 
-**[docs/COMO-HACER-APP.md](docs/COMO-HACER-APP.md)** — PWA, Android (Capacitor), etc.
+La app tiene manifest (`public/manifest.webmanifest`) y service worker (`public/sw.js`), así que el navegador del celular puede "instalarla" como app (ícono en el home, pantalla completa, funciona sin conexión tras la primera carga).
+
+Esto requiere que `dist/` esté publicado en un hosting con **HTTPS** (GitHub Pages, Netlify, Vercel, etc.) — `localhost` durante `pnpm run dev` también cuenta como origen seguro para probarlo. Abriendo esa URL desde Chrome/Safari en el celular, aparece la opción "Agregar a pantalla de inicio" / "Instalar app".
+
+Los íconos de la PWA (`public/icons/`) se generaron a partir de `build/icon.png`.

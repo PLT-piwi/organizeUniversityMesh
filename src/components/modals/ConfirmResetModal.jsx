@@ -3,7 +3,7 @@ import { Modal } from "../ui/Modal.jsx";
 import { btnStyle } from "../ui/btnStyle.js";
 
 export function ConfirmResetModal() {
-  const { confirmReset, setConfirmReset, resetAll } = useMalla();
+  const { confirmReset, setConfirmReset, resetAll, theme } = useMalla();
 
   if (!confirmReset) return null;
 
@@ -14,19 +14,19 @@ export function ConfirmResetModal() {
           fontSize: 15,
           fontWeight: 600,
           marginBottom: 6,
-          color: "#1A1A2E",
+          color: theme.textPrimary,
         }}
       >
         ¿Resetear la malla?
       </div>
-      <div style={{ fontSize: 13, color: "#64748B", marginBottom: 20 }}>
+      <div style={{ fontSize: 13, color: theme.textSecondary, marginBottom: 20 }}>
         Se restauraran los ramos, semestres, categorias y el nombre al estado
         inicial. Tambien se cerraran formularios y ediciones abiertas.
       </div>
       <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
         <button
           onClick={() => setConfirmReset(false)}
-          style={btnStyle("ghost")}
+          style={btnStyle("ghost", "md", theme)}
         >
           Cancelar
         </button>
